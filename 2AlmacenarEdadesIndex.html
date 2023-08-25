@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Problema 2 - Almacenar Edades</title>
+    <script src="2AlmacenarEdades.js"></script>
+</head>
+<body>
+    <h1>Problema 2 - Estadísticas de Edades</h1>
+    <form id="formulario">
+        <label for="edades">Ingrese las edades (separadas por comas):</label>
+        <input type="text" id="edades">
+        <br>
+        <button type="button" onclick="calcular()">Calcular</button>
+        <p id="resultado"></p>
+    </form>
+
+    <script>
+        function calcular() {
+        const edadesStr = document.getElementById("edades").value;
+        const edades = edadesStr.split(",").map(Number);
+
+        const resultados = calcularEstadisticasEdades(edades);
+
+        const resultadoP = document.getElementById("resultado");
+        resultadoP.textContent = `
+            Menores de edad: ${resultados.menores}
+            Mayores de edad: ${resultados.mayores}
+            Adultos mayores: ${resultados.adultosMayores}
+            Edad mínima: ${resultados.minEdad}
+            Edad máxima: ${resultados.maxEdad}
+            Promedio de edades: ${resultados.promedioEdades.toFixed(2)}
+        `;
+    }
+    </script>
+</body>
+</html>

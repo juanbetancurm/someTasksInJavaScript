@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Problema 4 - Emisora de Música</title>
+    <script src="4RifaGustosMusicales.js"></script>
+</head>
+<body>
+    <h1>Problema 4 - Emisora de Música</h1>
+    <form id="formulario">
+        <button type="button" onclick="agregarPersona()">Agregar Persona</button>
+        <button type="button" onclick="mostrarInformacionPersona()">Mostrar Información Persona</button>
+    </form>
+
+    <div id="resultado"></div>
+
+    <script>
+        class Persona {
+            constructor(nombre, cedula, fechaNacimiento, correo, ciudadResidencia, ciudadOrigen) {
+                this.nombre = nombre;
+                this.cedula = cedula;
+                this.fechaNacimiento = fechaNacimiento;
+                this.correo = correo;
+                this.ciudadResidencia = ciudadResidencia;
+                this.ciudadOrigen = ciudadOrigen;
+                this.cancionesFavoritas = [];
+            }
+
+            agregarCancionFavorita(artista, titulo) {
+                if (this.cancionesFavoritas.length < 3) {
+                    this.cancionesFavoritas.push({ artista, titulo });
+                } else {
+                    alert("No se pueden agregar más canciones favoritas.");
+                }
+            }
+
+            mostrarInformacion() {
+                const resultadoDiv = document.getElementById("resultado");
+                resultadoDiv.innerHTML = `
+                    <p><strong>Nombre:</strong> ${this.nombre}</p>
+                    <p><strong>Cédula:</strong> ${this.cedula}</p>
+                    <p><strong>Fecha de Nacimiento:</strong> ${this.fechaNacimiento}</p>
+                    <p><strong>Correo:</strong> ${this.correo}</p>
+                    <p><strong>Ciudad de Residencia:</strong> ${this.ciudadResidencia}</p>
+                    <p><strong>Ciudad de Origen:</strong> ${this.ciudadOrigen}</p>
+                    <p><strong>Canciones Favoritas:</strong></p>
+                    <ul>
+                        ${this.cancionesFavoritas.map(cancion => `<li>Artista: ${cancion.artista}, Título: ${cancion.titulo}</li>`).join('')}
+                    </ul>
+                `;
+            }
+        }
+
+        const personas = [];
+
+        function agregarPersona() {
+            const nombre = prompt("Ingrese el nombre:");
+            const cedula = prompt("Ingrese la cédula:");
+            const fechaNacimiento = prompt("Ingrese la fecha de nacimiento:");
+            const correo = prompt("Ingrese el correo electrónico:");
+            const ciudadResidencia = prompt("Ingrese la ciudad de residencia:");
+            const ciudadOrigen = prompt("Ingrese la ciudad de origen:");
+
+            const persona = new Persona(nombre, cedula, fechaNacimiento, correo, ciudadResidencia, ciudadOrigen);
+
+            alert("Ingrese canciones favoritas (máximo 3):");
+            for (let i = 0; i < 3; i++) {
+                const artista = prompt("Artista de la canción " + (i + 1) + ":");
+                const titulo = prompt("Título de la canción " + (i + 1) + ":");
+                persona.agregarCancionFavorita(artista, titulo);
+            }
+
+            personas.push(persona);
+        }
+
+        function mostrarInformacionPersona() {
+            const posicion = parseInt(prompt("Ingrese la posición de la persona en el vector ( Si es el primero, será el 0 y así continúando hasta el " + (personas.length - 1) + "):"));
+            const resultadoDiv = document.getElementById("resultado");
+            
+            if (posicion >= 0 && posicion < personas.length) {
+                personas[posicion].mostrarInformacion();
+            } else {
+                resultadoDiv.innerHTML = "<p>Posición inválida.</p>";
+            }
+        }
+    </script>
+</body>
+</html>

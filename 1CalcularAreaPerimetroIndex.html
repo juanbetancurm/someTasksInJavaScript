@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Problema 1 - Cálculos Geométricos</title>
+    <script src="1CalcularAreaPerimetro.js"></script>
+</head>
+<body>
+    <h1>Problema 1 - Cálculos Geométricos</h1>
+    <form id="formulario">
+        <label for="figura">Seleccione la figura:</label>
+        <select id="figura">
+            <option value="triangulo">Triángulo</option>
+            <option value="rectangulo">Rectángulo</option>
+            <option value="cuadrado">Cuadrado</option>
+            <option value="circulo">Círculo</option>
+        </select>
+        <br>
+        <div id="inputs"></div>
+        <br>
+        <button type="button" onclick="calcular()">Campos</button>
+        <button type="button" onclick="calcularArea()">Calcular Área</button>
+        <button type="button" onclick="calcularPerimetro()">Calcular Perímetro</button>
+        <p id="resultado"></p>
+    </form>
+
+    <script>
+        //Aquí tomo datos del formulario de selección de figura
+        function calcular() {
+        const figura = document.getElementById("figura").value;
+        const inputsDiv = document.getElementById("inputs");
+        const resultadoP = document.getElementById("resultado");
+
+        inputsDiv.innerHTML = "";
+        resultadoP.textContent = "";
+        //Aquí creo el formulario para tomar datos en cada caso
+        switch (figura) {
+            case "triangulo":
+                inputsDiv.innerHTML = `
+                    <label for="a">Lado a:</label>
+                    <input type="number" id="a"><br>
+                    <label for="b">Lado base:</label>
+                    <input type="number" id="b"><br>
+                    <label for="c">Lado c:</label>
+                    <input type="number" id="c"><br>
+                    <label for="h">Altura h:</label>
+                    <input type="number" id="h"><br>
+                `;
+                break;
+                case "rectangulo":
+                    inputsDiv.innerHTML = `
+                        <label for="a">Base a:</label>
+                        <input type="number" id="a"><br>
+                        <label for="b">Altura b:</label>
+                        <input type="number" id="b"><br>
+                    `;
+                    break;
+                case "cuadrado":
+                    inputsDiv.innerHTML = `
+                        <label for="a">Lado a:</label>
+                        <input type="number" id="a"><br>
+                    `;
+                    break;
+                case "circulo":
+                    inputsDiv.innerHTML = `
+                        <label for="r">Radio r:</label>
+                        <input type="number" id="r"><br>
+                    `;
+                    break;
+            }
+        }
+
+
+        function calcularArea() {
+        const figura = document.getElementById("figura").value;
+        const resultadoP = document.getElementById("resultado");
+        
+
+        switch (figura) {
+            case "triangulo":
+                var a = parseFloat(document.getElementById("a").value);
+                var b = parseFloat(document.getElementById("b").value);
+                var c = parseFloat(document.getElementById("c").value);
+                var h = parseFloat(document.getElementById("h").value);
+                const areaTriangulo = calcularAreaTriangulo(a, b, c, h);
+                resultadoP.textContent = `El área es: ${areaTriangulo}`;
+                break;
+
+            case "rectangulo":
+                var b = parseFloat(document.getElementById("b").value);
+                var h = parseFloat(document.getElementById("h").value);
+                const areaRectangulo = calcularAreaRectangulo(b, h);
+                resultadoP.textContent = `El área es: ${areaRectangulo}`;
+                break;
+            
+            case "cuadrado":
+                var a = parseFloat(document.getElementById("a").value);
+                const areaCuadrado = calcularAreaCuadrado(a);
+                resultadoP.textContent = `El área es: ${areaCuadrado}`;
+                break;
+            
+            case "circulo":
+                var r = parseFloat(document.getElementById("r").value);
+                const areaCirculo = calcularAreaCirculo(r);
+                resultadoP.textContent = `El área es: ${areaCirculo}`;
+                break;
+        }
+    }
+
+    function calcularPerimetro() {
+        const figura = document.getElementById("figura").value;
+        const resultadoP = document.getElementById("resultado");
+        /*const a = parseFloat(document.getElementById("a").value);
+        const b = parseFloat(document.getElementById("b").value);
+        const c = parseFloat(document.getElementById("c").value);
+        const h = parseFloat(document.getElementById("h").value);
+        const r = parseFloat(document.getElementById("r").value);*/
+
+        switch (figura) {
+            case "triangulo":
+                var a = parseFloat(document.getElementById("a").value);
+                var b = parseFloat(document.getElementById("b").value);
+                var c = parseFloat(document.getElementById("c").value);
+                var h = parseFloat(document.getElementById("h").value);
+                var perimetroTriangulo = calcularPerimetroTriangulo(a, b, c);
+                resultadoP.textContent = `El perímetro es: ${perimetroTriangulo}`;
+                break;
+            case "rectangulo":
+                var a = parseFloat(document.getElementById("a").value);
+                var h = parseFloat(document.getElementById("h").value);
+                var perimetroRectangulo = calcularPerimetroRectangulo(a, b);
+                resultadoP.textContent = `El perímetro es: ${perimetroRectangulo}`;
+                break;
+            case "cuadrado":
+                var a = parseFloat(document.getElementById("a").value);
+                const perimetroCuadrado = calcularPerimetroCuadrado(a, b);
+                resultadoP.textContent = `El perímetro es: ${perimetroCuadrado}`;
+                break;
+            case "circulo":
+                var r = parseFloat(document.getElementById("r").value);
+                const perimetroCirculo = calcularPerimetroCirculo(r);
+                resultadoP.textContent = `El perímetro es: ${perimetroCirculo}`;
+                break;
+        }
+    }
+    </script>
+</body>
+</html>

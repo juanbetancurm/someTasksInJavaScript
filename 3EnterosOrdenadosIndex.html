@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Problema 3 - Mezcla y Orden de Vectores</title>
+    <script src="3EnterosOrdenados.js"></script>
+</head>
+<body>
+    <h1>Problema 3 - Mezcla y Orden de Vectores</h1>
+    <form id="formulario">
+        <label for="vector1">Ingrese los elementos del vector 1 (separados por comas):</label>
+        <input type="text" id="vector1">
+        <br>
+        <label for="vector2">Ingrese los elementos del vector 2 (separados por comas):</label>
+        <input type="text" id="vector2">
+        <br>
+        <button type="button" onclick="calcular()">Calcular</button>
+        <p id="resultado"></p>
+    </form>
+
+    <script>
+         function calcular() {
+        const vector1Str = document.getElementById("vector1").value;
+        const vector1 = vector1Str.split(",").map(Number);
+
+        const vector2Str = document.getElementById("vector2").value;
+        const vector2 = vector2Str.split(",").map(Number);
+
+        const resultado = mezclarOrdenarVectores(vector1, vector2); // Call the function and capture the result
+
+        const resultadoP = document.getElementById("resultado");
+        if (typeof resultado === 'string') {
+            resultadoP.textContent = resultado; // If the result is a string, display an error message
+        } else {
+            resultadoP.textContent = "Resultado: " + resultado.join(', '); // Display the sorted and merged result
+        }
+    }
+    </script>
+</body>
+</html>
